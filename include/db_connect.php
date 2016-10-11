@@ -17,10 +17,8 @@ class DB_Connect {
         require_once 'config.php';
 
         // connecting to mysql
-        //$connexion  = new PDO('mysql:host=http://app.spectro-commerce.com/;dbname=miraldev;charset=utf8', 'miraldev', 'w4x5W4Vk');
         $con = new mysqli(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE);
 
-        //echo 'Status : '.$connexion->getAttribute(PDO::ATTR_CONNECTION_STATUS).PHP_EOL;
   
         // return database handler
         return $con;
