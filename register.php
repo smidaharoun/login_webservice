@@ -6,15 +6,13 @@ $db = new DB_Functions();
 // json response array
 $response = array("error" => FALSE);
 
-if (isset($_POST['id_site']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password'])) {
+if (isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['email']) && isset($_POST['password'])) {
 
     // receiving the post params
-    $id_site = $_POST['id_site'];
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $notification = $_POST['notification'];
 
     // check if user is already existed with the same email
     if ($db->getUserByEmail($email)) {
@@ -24,7 +22,7 @@ if (isset($_POST['id_site']) && isset($_POST['first_name']) && isset($_POST['las
         echo json_encode($response);
     } else {
         // create a new user
-        $user = $db->storeUser($id_site, $first_name, $last_name, $email, $password, $notification);
+        $user = $db->storeUser($first_name, $last_name, $email, $password, $notification);
         $response["error_msg2"] = "No user existed with " . $email;
         if ($user) {
             // user stored successfully
@@ -46,7 +44,7 @@ if (isset($_POST['id_site']) && isset($_POST['first_name']) && isset($_POST['las
 } else {
     // required post params is missing
     $response["error"] = TRUE;
-    $response["error_msg"] = "Required parameters (id_site, first_name, last_name, email, password) is missing!";
+    $response["error_msg"] = "Required parameters (first_name, last_name, email, password) is missing!";
     echo json_encode($response);
 }
 ?>
